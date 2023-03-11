@@ -1,0 +1,32 @@
+
+
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+int *stockSpan(int *a, int n)
+{
+    stack<int> s;
+    int i=0,*output = new int[n];
+    
+ 
+
+    while (i < n)
+    {
+        while (a[i] > a[s.top()] && s.size() > 0)//S.SIZE SHOULD BE IN LEFT
+        {
+            s.pop();
+        }
+        if (s.empty())
+        {
+            output[i] = i + 1;
+        }
+        else
+        {
+            output[i] = i - s.top();
+        }
+        s.push(i); // IMP
+
+        i++;
+    }
+    return output;
+}

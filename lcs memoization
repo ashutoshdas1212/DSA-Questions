@@ -1,0 +1,49 @@
+class Solution
+{
+public:
+    int lcs(string s1, string s2, int **output)
+    {
+        int m = s1.size();
+        int n = s2.size();
+        if(m==0 || n==0)
+        {
+            return 0;
+        }
+
+        if (output[m][n] != -1)
+        {
+            return output[m][n];
+        }
+        int ans;
+        if (s1[0] == s2[0])
+            ans = 1+ lcs(s1.substr(1), s2.substr(1), output);
+
+        else
+        {
+            int a = lcs(s1.substr(1), s2.substr(1),output);
+            int b = lcs(s1.substr(1), s2,output);
+            int c = lcs(s1, s2.substr(1),output);
+            ans = max(a, max(b, c));
+        }
+
+        output[m][n] = ans;
+
+        return ans;
+    }
+
+    int longestCommonSubsequence(string text1, string text2)
+    {
+        int m = text1.size();
+        int n = text2.size();
+        int **output = new int *[m+1];
+        for (int i = 0; i <= m; i++)
+        {
+            output[i] = new int[n+1];
+            for (int j = 0; j <= n; j++)
+            {
+                output[i][j] = -1;
+            }
+        }
+        return lcs(text1, text2, output);
+    }
+};

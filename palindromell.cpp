@@ -1,0 +1,4 @@
+bool isPalindrome(Node *head)
+{
+    
+}
